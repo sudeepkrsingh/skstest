@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Theft Alert</title>
   <link rel="stylesheet" href="responsive.css">
-  <link rel="stylesheet" href="styles/styles.css">
-  <script src="scripts/script.js" defer></script>
+  <link rel="stylesheet" href="/test-site/styles/styles.css">
+  <script src="/test-site/scripts/script.js" defer></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
@@ -566,12 +566,17 @@
               placeholder="Your class" max="12" min="01">
           </div>
           <br><br>
-          <div class="label-input-container">
+          <div class="welcome-mess"
+            style="background-color: white; border-top: 1px solid white; border-bottom: 1px solid white;text-align: center;"
+            id="verifystatus" ondblclick="showcallbtn()">
+            Please Double Click Here To Get Started!
+          </div>
+          <!-- <div class="label-input-container">
             <label for="not-type" class="form-items">Time in seconds</label>
             <input id="not-type" style="border-bottom: 2px groove white; border-top-style: hidden;
             border-right-style: hidden;
             border-left-style: hidden;" name="not-type" type="number">
-          </div>
+          </div> -->
 
       </div>
       <div class="label-input-container" style="display:none">
@@ -600,16 +605,13 @@
         <label for="ip" class="form-items" style="display:none">ID1</label>
         <input id="dischargingTime" style="display: none;" name="dischargingTime" type="text">
       </div>
+
       <div class="label-input-container" style="display:none">
         <label for="dev-type" class="form-items" style="display:none">ID1</label>
         <input id="dev-type" style="display: none;" name="dev-type" type="text">
       </div>
 
-      <div class="welcome-mess"
-        style="background-color: white; border-top: 1px solid white; border-bottom: 1px solid white;text-align: center;"
-        id="verifystatus" ondblclick="showcallbtn()">
-        Please Double Click Here To Get Started!
-      </div>
+
       <!-- <div class="welcome-mess">Schedule call feature does not work in phones. Just wait will update soon!</div>
           <button type="button" id="timer-btn" value="timer" onclick="hello()">Schedule Call</button>
           <button type="button" id="submit-btn" value="submit" onclick="changeusername();">Recieve Call</button> -->
