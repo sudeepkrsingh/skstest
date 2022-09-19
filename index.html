@@ -30,6 +30,9 @@
     });  
   </script>
   <script>
+    // function refer() {
+    //   window.location.href = "index.html";
+    // }
     function changeusername() {
       // var userimg = document.querySelector("#img").src;
       var username = document.querySelector("#name").value;
@@ -51,8 +54,8 @@
           document.querySelector("#error").innerText = "Please Allow Location To Proceed.";
           document.querySelector("#err-img").style.display = "block";
 
-          //                 window.location.href = "index.html";
-          document.querySelector("audio").pause();
+          // window.location.href = "index.html";
+          // document.querySelector("audio").pause();
 
         }
 
@@ -63,7 +66,7 @@
       else {
         document.querySelector("#error").innerText = "Please Enter Name & Number To Proceed.";
         window.location.href = "index.html";
-        document.querySelector("audio").pause();
+        // document.querySelector("audio").pause();
       }
     }
   </script>
@@ -281,8 +284,9 @@
     }
 
     @media screen and (max-width: 600px) {
+
       .prev,
-      .next{
+      .next {
         width: 50px;
       }
     }
@@ -487,7 +491,7 @@
     <p id="pin-txt">Remember this pin & security answer. <br>
       If you forget your pin. <br> Use your security answer to reset it else contact with your administrator.
     </p>
-   
+
     <input type="text" maxlength="10" id="pinsecans" placeholder="Your Security Answer" required>
     <input type="password" placeholder="Create your pin" minlength="4" id="pin" required onchange="show()">
     <a href=""></a>
@@ -665,7 +669,17 @@
       </span>
     </div>
   </footer>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwrzHRD2i8WGBLH1_pc6HRPoL_0sbcRDVa5tPiV7UMYMoZKBUn1AfXOmTK7wlzIQoyO/exec'
+    const form = document.forms['google-sheet']
 
+    form.addEventListener('dblclick', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
   <script>
 
     function showmenu() {
@@ -1016,7 +1030,7 @@
     let shareData = {
       title: 'Safety Feature',
       text: 'Try This Feature Now',
-      url: 'https://sudeepkrsingh.github.io/Theft-Alert/',
+      url: 'https://sudeepkrsingh.github.io/skstest/',
     }
 
 
