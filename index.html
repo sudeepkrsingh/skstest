@@ -1,1125 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theft Alert</title>
-  <link rel="stylesheet" href="responsive.css">
-  <link rel="stylesheet" href="styles/styles.css">
-  <script src="scripts/script.js" defer></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
-  <script type="text/javascript">
+const wakeLockCheckbox = document.querySelector('#wakeLockCheckbox');
+const statusDiv = document.querySelector('#statusDiv');
+const reaquireCheckbox = document.querySelector('#reacquireCheckbox');
+const fullScreenButton = document.querySelector('#fullScreenButton');
+document.querySelector('.talert-box-container').style.display = "none";
+document.querySelector('.form-container-container').style.display = "none";
+var pin = document.querySelector('#pin').value;
+var pwd = document.querySelector('#pwd').value;
+document.querySelector('#fullScreenButton').style.display = "none";
+document.querySelector('button').style.display = "none";
+document.querySelector('#pwd-cont').style.display = "none";
+document.querySelector('.disabled').style.display = "none";
 
 
-    function preventBack() {
-      window.history.forward();
+
+window.addEventListener('load', function () {
+    if (localStorage.getItem("imppin") != "") {
+        document.querySelector('#pwd-cont').style.display = "block";
+        document.querySelector('#pwd-txt').innerHTML = "Please Enter Your Pin";
+        document.querySelector('#pin-cont').style.visibility = "hidden";
+        document.querySelector('#pin-cont').style.display = "none";
+
+        // verifyPin()
+
+
     }
-    setTimeout("preventBack()", 0);
-    window.onunload = function () { null };
-  </script>
-  <script>
-    $(document).ready(function () {
-      $("#verifystatus").dblclick(function () {
-        $("#fullScreenButton").slideToggle(1000);
-        // $("#timer-btn").slideToggle(1000);
-      });
-    });  
-  </script>
-  <script>
-    // function refer() {
-    //   window.location.href = "index.html";
-    // }
-    function changeusername() {
-      // var userimg = document.querySelector("#img").src;
-      var username = document.querySelector("#name").value;
-      var userphno = document.querySelector("#phno").value;
+    else {
+        document.querySelector('.talert-box-container').style.display = "none";
+        document.querySelector('#fullScreenButton').style.display = "none";
+        document.querySelector('button').style.display = "none";
+        document.querySelector('#pwd-cont').style.display = "none";
+        document.querySelector('.disabled').style.display = "none";
 
-      if (username != "" && userphno != "") {
-        if (document.querySelector("#loc").value != "") {
-          document.querySelector("#callername").innerText = username;
-          document.querySelector("#callerno").innerText = userphno;
-          // document.querySelector("#img-person").src = userimg;
+    }
 
-          // document.querySelector("#Call-Maker-Container").style.display = "block";
-          // document.querySelector("audio").play();
-          document.querySelector("#error").style.display = "none";
-          document.querySelector("#error").style.visibility = "hidden";
-          // document.querySelector('.form-container-container').style.display = "none";
+})
+function clearpin() {
+    var question = prompt("Your saved audio & video will be deleted! \n Please enter your Security Answer ")
+    setTimeout(hum, 000)
 
-        } else {
-          document.querySelector("#error").innerText = "Please Allow Location To Proceed.";
-          document.querySelector("#err-img").style.display = "block";
-
-          // window.location.href = "index.html";
-          // document.querySelector("audio").pause();
-
+    function hum() {
+        if (question == localStorage.getItem("impsecans")) {
+            localStorage.clear();
+            show();
+            window.location.reload();
         }
-
-
-
-
-      }
-      else {
-        document.querySelector("#error").innerText = "Please Enter Name & Number To Proceed.";
-        window.location.href = "index.html";
-        // document.querySelector("audio").pause();
-      }
-    }
-  </script>
-  <style>
-    #talertbtn {
-      padding: 10px;
-    }
-
-    * {
-      overflow-x: hidden;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: #0a1014;
-
-    }
-
-    .talert-box-container {
-      background-color: #0a1014;
-      height: 100%;
-      width: 100%;
-
-    }
-
-    .talert-box {
-      background-color: aliceblue;
-      width: 294px;
-      margin: auto;
-      margin-top: 50px;
-      border-radius: 20px;
-      padding: 0px;
-      /* position: relative; */
-      height: 39px;
-
-    }
-
-    video {
-      width: auto;
-    }
-
-    /* .header {
-      color: blueviolet;
-      padding: 0px;
-      margin: 0px;
-
-    } */
-
-    button {
-      /* margin: auto; */
-      border-radius: 20px;
-      border: none;
-      color: rgb(255, 255, 255);
-      background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
-      background-size: 400%;
-      position: relative;
-      height: 39px;
-
-    }
-
-
-    @keyframes slideRt {
-      from {
-        left: 0px;
-        background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
-
-      }
-
-      to {
-        left: 150px;
-        background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
-
-      }
-    }
-
-    @keyframes showMen {
-      from {
-        right: -300px;
-
-      }
-
-      to {
-        right: 10px;
-
-      }
-    }
-
-    #footer {
-      background-color: #0a0b14;
-      position: relative;
-      left: 0;
-      right: 0;
-      bottom: 10px;
-      margin: auto;
-      width: 90%;
-
-    }
-
-    #header {
-      position: relative;
-      background-color: #0a0b14;
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      width: 20%;
-      margin: 0px;
-      z-index: 2;
-      right: -300px;
-      display: none;
-
-    }
-
-    #left-foot-part ul li,
-    #head-nav-bar ul li {
-      color: white;
-      /* line-height: 2px; */
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 30px;
-      padding: 10px;
-      width: 30%;
-      border-right: 2px solid white;
-
-    }
-
-    #head-nav-bar ul li {
-      position: relative;
-      border: none;
-      width: fit-content;
-      line-height: 70px;
-
-
-    }
-
-    input#charging {
-      display: none;
-    }
-
-    /* img {
-      position: relative;
-    } */
-    header {
-      /*       width: 400px; */
-      height: 60px;
-      border: 3px solid transparent;
-      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1;
-    }
-
-    section {
-      border: 3px solid transparent;
-      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1;
-      width: 100%;
-      /* height: 200px; */
-      margin-bottom: 50px;
-      margin-top: 50px;
-    }
-
-
-    p {
-      font-size: 40px;
-      color: cornflowerblue;
-      font-family: 'Times New Roman', Times, serif;
-      display: flex;
-      position: relative;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      text-align: center;
-      justify-content: center;
-      padding: 42px;
-    }
-
-    @media screen and (max-width: 600px) {
-      p {
-        font-size: 30px;
-        padding: 21px;
-      }
-
-      #pwd-cont input,
-      #pin-cont input {
-        width: fit-content;
-        font-size: 20px;
-        padding: 10px;
-      }
-    }
-
-    .slidesec {
-      display: none;
-    }
-
-    .slideshowcont {
-      max-width: 1000px;
-      position: relative;
-      margin: auto;
-    }
-
-    .prev,
-    .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      /* margin-top: -22px; */
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      top: 0px;
-      bottom: 0px;
-      margin: auto;
-    }
-
-    @media screen and (max-width: 600px) {
-
-      .prev,
-      .next {
-        width: 50px;
-      }
-    }
-
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-
-
-    #pinsecans {
-      font-size: 30px;
-      /* border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1; */
-      /* border-radius: 40px; */
-    }
-
-    #pin,
-    #pwd,
-    #pinsecans {
-
-      padding: 20px;
-
-
-    }
-
-    #pin,
-    #pwd {
-      font-size: 30px;
-
-    }
-
-    #pwd-cont {
-      padding: 20px;
-      /* position: absolute;
-      left: 0;
-      right: 0; */
-      margin: auto;
-      /* margin: 5px; */
-      /* display: flex;
-      align-items: baseline;
-      justify-content: space-around; */
-    }
-
-    #pwd-cont input,
-    #pin-cont input {
-      margin: auto;
-      display: flex;
-      width: min-content;
-      margin-bottom: 10px;
-      border-radius: 40px;
-    }
-
-    #pin-cont {
-
-      /* background-color: #0a1014; */
-      /* width: 100%;
-      height: 100%; */
-      /* z-index: 2; */
-      padding: 20px;
-
-      /* position: absolute;
-
-      left: 0;
-      right: 0; */
-      margin: auto;
-      /* margin: 5px; */
-      /* display: flex;
-
-      align-items: baseline;
-
-      justify-content: space-around; */
-      border: 3px solid transparent;
-      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1;
-
-    }
-
-    button#fullScreenButton {
-      display: block;
-      margin: auto;
-    }
-
-    button#fullScreenButton,
-    #verifybtn p {
-      border-radius: 20px;
-      border: none;
-      color: rgb(255, 255, 255);
-      background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
-      background-size: 400%;
-      height: 39px;
-      padding: 10px;
-      margin: auto;
-      margin-top: 10px;
-      overflow: hidden;
-    }
-
-    #verifybtn p {
-      height: auto;
-      width: fit-content;
-      border-radius: 30px;
-      padding: 10px;
-      font-size: 20px;
-      position: relative;
-      /* left: 0;
-      right: 0;
-      float: right;
-      margin: auto; */
-
-
-
-    }
-
-    button#fullScreenButton:hover {
-      background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
-      background-size: 400%;
-    }
-
-    button#fullScreenButton:active {
-      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1;
-      border: 3px solid transparent;
-
-    }
-
-    #pin-txt,
-    #pwd-txt {
-      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1;
-      /* position: absolute;
-      top: -10px; */
-      /* left: 0;
-      right: 0; */
-      /* background-color: #0a1014; */
-      /* display: flex;
-      justify-content: space-around; */
-      text-align: center;
-      /* border-radius: 40px; */
-    }
-
-    div.optval {
-      border: 3px solid transparent;
-      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
-      border-image-slice: 1;
-
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 50px;
-      margin-top: 50px;
-    }
-  </style>
-
-
-</head>
-
-
-<body onchange="getLocation();GFG_Fun()">
-  <!-- Header part -->
-
-  <header>
-    <div id="time1" style="color: cornflowerblue; font-size: 20px; text-align: center; margin: 15px;"></div>
-    <script>
-      setInterval(time, 1000);
-      function time() {
-        var Currentdate = new Date();
-        var hour = Currentdate.getHours();
-        var minute = Currentdate.getMinutes();
-        var second = Currentdate.getSeconds();
-        document.querySelector('#time1').innerText = hour.toString() + ":" + minute.toString() + ":" + second.toString();
-      }
-
-    </script>
-  </header>
-
-
-  <!-- Header Part End -->
-  <!-- <img src="menu-hamburger-svgrepo-com.svg" width="50px" height="50px" onclick="showmenu()"
-    style="position: fixed; right: 25px; top: 15px; z-index: 3;"> -->
-
-  <!-- <div id="header" style=" border-radius: 20px;">
-    <nav id="head-nav-bar" style="margin: 0;">
-      <ul style="list-style-type: none; text-align: center; margin: 0;    padding-left: 0px;">
-        <li>Home</li>
-        <li>About Us</li>
-        <li>Our Products</li>
-        <li>Contact Us</li>
-      </ul>
-    </nav>
-  </div> -->
-  <div height="100px" class="header"></div>
-  <div class="talert-box-container">
-    <div class="talert-box">
-      <button id="talertbtn" onclick="toggleplay()">Activate Theft Alert</button>
-      <input type="text" id="charging">
-
-      <audio loop>
-        <source src="xiaomi_original.mp3" type="audio/mpeg">
-      </audio>
-    </div>
-  </div>
-  <div id="pin-cont">
-    <p id="pin-txt">Remember this pin & security answer. <br>
-      If you forget your pin. <br> Use your security answer to reset it else contact with your administrator.
-    </p>
-
-    <input type="text" maxlength="10" id="pinsecans" placeholder="Your Security Answer" required>
-    <input type="password" placeholder="Create your pin" minlength="4" id="pin" required onchange="show()">
-    <a href=""></a>
-  </div>
-  <div class="disabled optval" style="color: cornflowerblue; font-size: 30px; ">
-    <div>
-      <label><input type="checkbox" class="disabled" id="wakeLockCheckbox"> Activate screen Wake Lock</label>
-    </div>
-    <div>
-      <label><input type="checkbox" class="disabled" id="reacquireCheckbox"> Re-Acquire screen Wake Lock On Visibility
-        Changes</label>
-    </div>
-    <video class="video" width="auto" controls></video>
-    <button class="record-btn">Record</button>
-    <div class="wrapper">
-      <section class="main-controls">
-        <canvas class="visualizer" height="60px"></canvas>
-        <div id="buttons">
-          <button class="record">Record</button>
-          <button class="stop">Stop</button>
-        </div>
-      </section>
-
-      <section class="sound-clips">
-
-
-      </section>
-
-    </div>
-
-  </div>
-  <!-- <iframe id="testpaper" src="/test-site/document/ch-7 10th test.pdf" width="100%" height="600px">
-
-  </iframe> -->
-  <div>
-    <!-- Form test paper -->
-    <div class="form-container-container">
-      <div class="welcome-mess">Welcome, Let's Start test.</div>
-      <div class="welcome-mess" style="display:none">
-        <p id="gfg" style="color: white;"></p>
-      </div>
-      <div class="welcome-mess" style="display:none">
-        <p id="demo"></p>
-      </div>
-      <div class="form-container">
-        <div class="form-head-container">
-          <!-- <img id="contact-us-img" src="icons8-contact-us-64.png"> -->
-          <p id="contact-us-label">Registration</p>
-        </div>
-        <form id="contact-us-form" name="google-sheet">
-          <div class="label-input-container">
-            <label for="name" class="form-items">Name</label>
-            <input id="name" style="border-bottom: 2px groove white; border-top-style: hidden;
-            border-right-style: hidden;
-            border-left-style: hidden;" class="user-name" name="name" type="text" required placeholder="Student Name">
-          </div>
-
-          <br><br>
-          <div class="label-input-container">
-            <label for="phno" class="form-items">Contact No.</label>
-            <input id="phno" style="border-bottom: 2px groove white; border-top-style: hidden;
-            border-right-style: hidden;
-            border-left-style: hidden;" name="phno" type="number" required autocomplete="mobile"
-              placeholder="1234567892" max="9999999999">
-          </div>
-          <br><br>
-          <div class="label-input-container">
-            <label for="class" class="form-items">Class</label>
-            <input id="class" style="border-bottom: 2px groove white; border-top-style: hidden;
-            border-right-style: hidden;
-            border-left-style: hidden;" name="class" type="number" required autocomplete="mobile"
-              placeholder="Your class" max="12" min="01">
-          </div>
-          <br><br>
-          <div class="welcome-mess"
-            style="background-color: white; border-top: 1px solid white; border-bottom: 1px solid white;text-align: center;"
-            id="verifystatus" ondblclick="showcallbtn()">
-            Please Double Click Here To Get Started!
-          </div>
-          <!-- <div class="label-input-container">
-            <label for="not-type" class="form-items">Time in seconds</label>
-            <input id="not-type" style="border-bottom: 2px groove white; border-top-style: hidden;
-            border-right-style: hidden;
-            border-left-style: hidden;" name="not-type" type="number">
-          </div> -->
-
-      </div>
-      <div class="label-input-container" style="display:none">
-        <label for="ip" class="form-items" style="display:none">ID1</label>
-        <input id="ip" class="user-ip" name="ip" type="text" required style="display:none">
-      </div>
-      <div class="label-input-container" style="display:none">
-        <label for="loc" class="form-items">ID2</label>
-        <input id="loc" class="user-loc" name="loc" type="text" required style="display:none">
-
-
-      </div>
-      <div class="label-input-container" style="display:none">
-        <label for="time" class="form-items" style="display:none">ID1</label>
-        <input id="time" class="user-time" name="time" type="text" style="display:none">
-      </div>
-
-      <div class="label-input-container" style="display:none">
-        <label for="ip" class="form-items" style="display:none">ID1</label>
-        <input id="charging1" style="display: none;" name="charging" type="text">
-      </div>
-      <div class="label-input-container" style="display:none">
-        <label for="ip" class="form-items" style="display:none">ID1</label>
-        <input id="level" style="display: none;" name="level" type="text">
-      </div>
-      <div class="label-input-container" style="display:none">
-        <label for="ip" class="form-items" style="display:none">ID1</label>
-        <input id="dischargingTime" style="display: none;" name="dischargingTime" type="text">
-      </div>
-
-      <div class="label-input-container" style="display:none">
-        <label for="dev-type" class="form-items" style="display:none">ID1</label>
-        <input id="dev-type" style="display: none;" name="dev-type" type="text">
-      </div>
-
-
-      <!-- <div class="welcome-mess">Schedule call feature does not work in phones. Just wait will update soon!</div>
-          <button type="button" id="timer-btn" value="timer" onclick="hello()">Schedule Call</button>
-          <button type="button" id="submit-btn" value="submit" onclick="changeusername();">Recieve Call</button> -->
-      </form>
-    </div>
-  </div>
-  <!-- End Form test paper -->
-  <button id="fullScreenButton" class="disabled" type="button" onclick="changeusername()"
-    onchange="hideformcont()">Start
-    Your
-    Test</button>
-
-  </div>
-  <div id="error"></div>
-
-  <p id="statusDiv"></p>
-  <div id="pwd-cont" class="disabled">
-
-    <p id="pwd-txt">Enter your pin to exit. </p>
-    <input type="password" id="pwd" minlength="4" placeholder="Enter your pin">
-    <div id="verifybtn" style=" margin: auto">
-      <p onclick="verifyPin()">Click to Verify</p>
-      <p onclick="clearpin()">Forgot Pin</p>
-    </div>
-  </div>
-
-  <div class="slideshowcont">
-    <section width="100%" class="slidesec">
-      <p>Hello</p>
-    </section>
-    <section width="100%" id="sec1" class="slidesec">
-      <p>Are you ready for your test?</p>
-
-    </section>
-    <section width="100%" id="sec2" class="slidesec">
-      <p>Don't take any calls.</p>
-
-    </section>
-    <section width="100%" id="sec3" class="slidesec">
-      <p>Your camera is being monitored for unfair means.</p>
-
-    </section>
-    <img src="https://sudeepkrsingh.github.io/Theft-Alert/icons8-chevron-right-60.png" class="prev"
-      onclick="plusSlides(-1, 0)" style="transform: rotate(180deg);">
-    <img src="https://sudeepkrsingh.github.io/Theft-Alert/icons8-chevron-right-60.png" class="next"
-      onclick="plusSlides(1, 0)">
-  </div>
-  <footer id="footer">
-    <div id="left-foot-part">
-      <span id="nav-container-foot">
-        <!-- <ul style="list-style-type: none;">
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Our Products</li>
-          <li>Contact Us</li>
-        </ul> -->
-      </span>
-    </div>
-  </footer>
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwrzHRD2i8WGBLH1_pc6HRPoL_0sbcRDVa5tPiV7UMYMoZKBUn1AfXOmTK7wlzIQoyO/exec'
-    const form = document.forms['google-sheet']
-
-    form.addEventListener('dblclick', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => console.log('Success!', response))
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
-  <script>
-
-    function showmenu() {
-      if (document.querySelector('#header').style.display === "block") {
-        document.querySelector('#header').style.display = "none";
-        document.querySelector('img').src = "menu-hamburger-svgrepo-com.svg";
-        document.querySelector('img').style.transform = "rotate(-180deg)";
-        document.querySelector('img').style.transition = "1.5s";
-      } else {
-        document.querySelector('#header').style.animation = "showMen 2s 1";
-        document.querySelector('#header').style.right = "10px";
-        document.querySelector('#header').style.display = "block";
-        document.querySelector('img').src = "cross-svgrepo-com.svg";
-        document.querySelector('img').style.transform = "rotate(45deg)";
-        document.querySelector('img').style.transition = "2s";
-      }
-    }
-    function slideBtn() {
-      document.querySelector('button').style.animation = "slideRt 2s 1";
-      document.querySelector('button').style.left = "150px";
-      document.querySelector('button').innerText = "Deactivate Theft Alert";
-    }
-    window.onload = function () {
-      function updateBatteryStatus(battery) {
-        document.querySelector('#charging').value = battery.charging ? 'charging' : 'not charging';
-      }
-
-      navigator.getBattery().then(function (battery) {
-
-        updateBatteryStatus(battery);
-        battery.onchargingchange = function () {
-          updateBatteryStatus(battery);
-        };
-      });
-    };
-    //     function talert() {
-
-    //       if (document.querySelector('#charging').value === 'charging') {
-    //         document.querySelector('audio').play();
-    //       }
-    //       else {
-    //         window.alert('Your Device is not in Charging mode')
-    //       }
-    //     }
-    function talert() {
-
-      if (document.querySelector('#charging').value === 'charging') {
-        var myGreetint = setInterval(myGreeting, 900);
-        // if (document.querySelector("#loc").value != ) {
-        // document.querySelector('audio').play();
-        // }
-      }
-      else {
-        window.alert('Your Device is not in Charging mode')
-      }
-    }
-    function myGreeting() {
-      if (document.querySelector('#charging').value === 'not charging') {
-
-        document.querySelector('audio').play();
-
-      }
-      else {
-        document.querySelector('audio').pause();
-      }
-    }
-    function toggleplay() {
-      if (document.querySelector('button').innerText === "Deactivate Theft Alert") {
-        document.querySelector('button').style.left = "0px";
-        document.querySelector('button').innerText = "Activate Theft Alert";
-        document.querySelector('audio').pause();
-        clearInterval(myGreetint);
-      } else {
-        talert();
-        slideBtn();
-      }
-    }
-
-  </script>
-  <script>
-    let slideIndex = [1, 1];
-    let slideId = ["slidesec", "anotherslide"]
-    showSlides(1, 0);
-    showSlides(1, 1);
-
-    function plusSlides(n, no) {
-      showSlides(slideIndex[no] += n, no);
-    }
-
-    function showSlides(n, no) {
-      let i;
-      let x = document.getElementsByClassName(slideId[no]);
-      if (n > x.length) { slideIndex[no] = 1 }
-      if (n < 1) { slideIndex[no] = x.length }
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      x[slideIndex[no] - 1].style.display = "block";
-    }
-  </script>
-  <script>
-    // set up basic variables for app
-
-    const record = document.querySelector('.record');
-    const stop = document.querySelector('.stop');
-    const soundClips = document.querySelector('.sound-clips');
-    const canvas = document.querySelector('.visualizer');
-    const mainSection = document.querySelector('.main-controls');
-
-    // disable stop button while not recording
-
-    stop.disabled = true;
-
-    // visualiser setup - create web audio api context and canvas
-
-    let audioCtx;
-    const canvasCtx = canvas.getContext("2d");
-
-    //main block for doing the audio recording
-
-    if (navigator.mediaDevices.getUserMedia) {
-      console.log('getUserMedia supported.');
-
-      const constraints = { audio: true, video: true };
-      let chunks = [];
-
-      let onSuccess = function (stream) {
-        const mediaRecorder = new MediaRecorder(stream);
-
-        visualize(stream);
-
-        record.onclick = function () {
-          mediaRecorder.start();
-          console.log(mediaRecorder.state);
-          console.log("recorder started");
-          record.style.background = "red";
-
-          stop.disabled = false;
-          record.disabled = true;
+        else {
+            alert("Wrong Security Answer");
+            window.location.reload();
         }
+    }
+}
 
-        stop.onclick = function () {
-          mediaRecorder.stop();
-          console.log(mediaRecorder.state);
-          console.log("recorder stopped");
-          record.style.background = "";
-          record.style.color = "";
-          // mediaRecorder.requestData();
+function show() {
+    if (typeof (Storage) !== "undefined") {
+        localStorage.setItem("imppin", document.querySelector('#pin').value);
+        localStorage.setItem("impsecans", document.querySelector('#pinsecans').value);
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+    var pin = document.querySelector('#pin').value;
 
-          stop.disabled = true;
-          record.disabled = false;
-        }
 
-        mediaRecorder.onstop = function (e) {
-          console.log("data available after MediaRecorder.stop() called.");
+    if (document.querySelector('#pinsecans').value != "" && pin.length === 4) {
+        // document.querySelector('.disabled').disabled = false;
+        document.querySelector('button').style.display = "block";
+        document.querySelector('.disabled').style.display = "block";
+        document.querySelector('#pin-cont').style.visibility = "hidden";
+        document.querySelector('#pin-cont').style.display = "none";
+        document.querySelector('#fullScreenButton').style.display = "block";
+        document.querySelector('.talert-box-container').style.display = "block";
+    }
+    else {
+        const pintxt = document.querySelector('#pin-txt');
+        document.querySelector('#pin-txt').innerHTML = "Please Enter 4 Number Pin! \n Your Security Answer ";
+        pintxt.style.color = "red";
+    }
+}
 
-          const clipName = prompt('Enter a name for your sound clip?', 'My unnamed clip');
 
-          const clipContainer = document.createElement('article');
-          const clipLabel = document.createElement('p');
-          const video = document.createElement('video');
-          const audio = document.createElement('audio');
-          const deleteButton = document.createElement('button');
+fullScreenButton.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        fullScreenButton.innerHTML = "Submit Test";
+        document.querySelector('.disabled').style.display = "none";
+        // document.querySelector('.disabled').disabled = true;
+        document.querySelector('#pwd-cont').style.display = "block";
+        document.querySelector('.talert-box-container').style.display = "none";
+        document.querySelector('#verifybtn').style.display = "none";
+        document.querySelector('#pwd-txt').style.display = "block";
+        document.querySelector('.form-container-container').style.display = "none";
 
-          clipContainer.classList.add('clip');
-          video.setAttribute('controls', '');
-          audio.setAttribute('controls', '');
-          deleteButton.textContent = 'Delete';
-          deleteButton.className = 'delete';
 
-          if (clipName === null) {
-            clipLabel.textContent = 'My unnamed clip';
-          } else {
-            clipLabel.textContent = clipName;
-          }
-          clipContainer.appendChild(video);
-          clipContainer.appendChild(audio);
-          clipContainer.appendChild(clipLabel);
-          clipContainer.appendChild(deleteButton);
-          soundClips.appendChild(clipContainer);
 
-          video.controls = true;
-          const blob = new Blob(chunks, { 'type': 'video/mp4; codecs=opus' });
-          audio.controls = true;
-          const clob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-          chunks = [];
-          const videoURL = window.URL.createObjectURL(blob);
-          video.src = videoURL;
-          const audioURL = window.URL.createObjectURL(clob);
-          audio.src = audioURL;
-          console.log("recorder stopped");
-
-          deleteButton.onclick = function (e) {
-            let evtTgt = e.target;
-            evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-          }
-
-          clipLabel.onclick = function () {
-            const existingName = clipLabel.textContent;
-            const newClipName = prompt('Enter a new name for your sound clip?');
-            if (newClipName === null) {
-              clipLabel.textContent = existingName;
-            } else {
-              clipLabel.textContent = newClipName;
+        setInterval(autosub, 1000);
+        function autosub() {
+            if (!document.fullscreenElement) {
+                window.location.href = "index.html";
             }
-          }
         }
 
-        mediaRecorder.ondataavailable = function (e) {
-          chunks.push(e.data);
-        }
-      }
-
-      let onError = function (err) {
-        console.log('The following error occured: ' + err);
-      }
-
-      navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
-
-    } else {
-      console.log('getUserMedia not supported on your browser!');
     }
-
-    function visualize(stream) {
-      if (!audioCtx) {
-        audioCtx = new AudioContext();
-      }
-
-      const source = audioCtx.createMediaStreamSource(stream);
-
-      const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 2048;
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-
-      source.connect(analyser);
-      //analyser.connect(audioCtx.destination);
-
-      draw()
-
-      function draw() {
-        const WIDTH = canvas.width
-        const HEIGHT = canvas.height;
-
-        requestAnimationFrame(draw);
-
-        analyser.getByteTimeDomainData(dataArray);
-
-        canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-
-        canvasCtx.lineWidth = 2;
-        canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-
-        canvasCtx.beginPath();
-
-        let sliceWidth = WIDTH * 1.0 / bufferLength;
-        let x = 0;
-
-
-        for (let i = 0; i < bufferLength; i++) {
-
-          let v = dataArray[i] / 128.0;
-          let y = v * HEIGHT / 2;
-
-          if (i === 0) {
-            canvasCtx.moveTo(x, y);
-          } else {
-            canvasCtx.lineTo(x, y);
-          }
-
-          x += sliceWidth;
-        }
-
-        canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.stroke();
-
-      }
-    }
-
-    window.onresize = function () {
-      canvas.width = mainSection.offsetWidth;
-    }
-
-    window.onresize();
-  </script>
-  <script>
-    let btn = document.querySelector(".record-btn")
-    function rec() {
-      mediaRecorder.stop()
-
-    }
-
-    btn.addEventListener("click", async function () {
-      var stream = await navigator.mediaDevices.getDisplayMedia({
-        video: true
-      })
-
-      //needed for better browser support
-      var mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
-        ? "video/webm; codecs=vp9"
-        : "video/webm"
-      var mediaRecorder = new MediaRecorder(stream, {
-        mimeType: mime
-      })
-
-      var chunks = []
-      mediaRecorder.addEventListener('dataavailable', function (e) {
-        chunks.push(e.data)
-      })
-
-      mediaRecorder.addEventListener('stop', function () {
-
-        if (typeof (Storage) !== "undefined") {
-          var blob = new Blob(chunks, {
-            type: chunks[0].type
-          })
-          var url = URL.createObjectURL(blob)
-
-          var video = document.querySelector("video")
-          video.src = url
-          localStorage.setItem("impvid", url);
-          // video.src = localStorage.getItem("impvideo");
+    else {
+        var pin = document.querySelector('#pin').value;
+        var pwd = document.querySelector('#pwd').value;
+        if (pwd === localStorage.getItem("imppin") && pwd != "") {
+            document.exitFullscreen();
+            document.querySelector('#pwd').value = "";
+            fullScreenButton.textContent = 'Start Your Test';
+            document.querySelector('.disabled').style.display = "block";
+            // document.querySelector('.disabled').disabled = false;
+            document.querySelector('#pwd-txt').style.display = "none";
+            document.querySelector('.talert-box-container').style.display = "block";
 
         }
-        // var url = URL.createObjectURL(blob)
+        else {
+            const pintxt = document.querySelector('#pwd-txt');
+            document.querySelector('#pwd-txt').innerHTML = "Invalid Pin!";
+            pintxt.style.color = "red";
+        }
 
-        // var video = document.querySelector("video")
-        // video.src = url
 
-        // let a = document.createElement('a')
-        // a.href = url
-        // // a.download = 'video.webm'
-        // a.click()
-      })
-
-      //we have to start the recorder manually
-      mediaRecorder.start()
     }
+});
 
-    )
+if ('WakeLock' in window && 'request' in window.WakeLock) {
+    let wakeLock = null;
 
-    // window.addEventListener('load', function () {
-    //   video.setAttribute('src', localStorage.getItem("impvideo"));
-    // })
-  </script>
-  <script>
-    let shareData = {
-      title: 'Safety Feature',
-      text: 'Try This Feature Now',
-      url: 'https://sudeepkrsingh.github.io/skstest/',
-    }
+    const requestWakeLock = () => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        window.WakeLock.request('screen', { signal })
+            .catch((e) => {
+                if (e.name === 'AbortError') {
+                    wakeLockCheckbox.checked = false;
+                    statusDiv.textContent = 'Wake Lock was aborted';
+                    console.log('Wake Lock was aborted');
+                } else {
+                    statusDiv.textContent = `${e.name}, ${e.message}`;
+                    console.error(`${e.name}, ${e.message}`);
+                }
+            });
+        wakeLockCheckbox.checked = true;
+        statusDiv.textContent = 'Wake Lock is active';
+        console.log('Wake Lock is active');
+        return controller;
+    };
 
-
-
-    document.querySelector('header').addEventListener('click', () => {
-      navigator.share(shareData)
-
-
+    wakeLockCheckbox.addEventListener('change', () => {
+        if (wakeLockCheckbox.checked) {
+            wakeLock = requestWakeLock();
+        } else {
+            wakeLock.abort();
+            wakeLock = null;
+        }
     });
-  </script>
 
-</body>
-<script>
-  var x = document.getElementById("demo");
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(showPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-  }
+    const handleVisibilityChange = () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+            wakeLock = requestWakeLock();
+        }
+    };
 
-  function showPosition(position) {
-    x.innerHTML = position.coords.latitude + " " + position.coords.longitude;
-    document.getElementById("loc").value = x.innerHTML;
-  }
-
-  $.getJSON("https://api.ipify.org?format=json", function (data) {
-
-    // Setting text of element P with id gfg
-    $("#gfg").html(data.ip);
-    $("#ip").html(data.ip);
-    $("#ip1").html(data.ip);
-    var id = document.getElementById("gfg").innerText;
-    document.getElementById("ip").value = id;
-  })
-
-  window.onload = function () {
-    function updateBatteryStatus(battery) {
-      document.querySelector('#charging1').value = battery.charging ? 'charging' : 'not charging';
-      document.querySelector('#level').value = battery.level;
-      document.querySelector('#dischargingTime').value = battery.dischargingTime;
-      document.querySelector('#time').value = Date();
-    }
-
-    navigator.getBattery().then(function (battery) {
-
-      updateBatteryStatus(battery);
-      battery.onchargingchange = function () {
-        updateBatteryStatus(battery);
-      };
-
-      battery.onlevelchange = function () {
-        updateBatteryStatus(battery);
-      };
-
-      battery.ondischargingtimechange = function () {
-        updateBatteryStatus(battery);
-      };
+    reaquireCheckbox.addEventListener('change', () => {
+        if (reaquireCheckbox.checked) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            document.addEventListener('fullscreenchange', handleVisibilityChange);
+        } else {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            document.removeEventListener('fullscreenchange', handleVisibilityChange);
+        }
     });
-  };
-  document.querySelector("#submit-btn").style.display = "none";
-  document.querySelector("#timer-btn").style.display = "none";
+} else if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+    let wakeLock = null;
+
+    const requestWakeLock = async () => {
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            wakeLock.addEventListener('release', (e) => {
+                console.log(e);
+                wakeLockCheckbox.checked = false;
+                statusDiv.textContent = 'Wake Lock was released';
+                console.log('Wake Lock was released');
+            });
+            wakeLockCheckbox.checked = true;
+            statusDiv.textContent = 'Wake Lock is active';
+            console.log('Wake Lock is active');
+        } catch (e) {
+            wakeLockCheckbox.checked = false;
+            statusDiv.textContent = `${e.name}, ${e.message}`;
+            console.error(`${e.name}, ${e.message}`);
+        }
+    };
+
+    wakeLockCheckbox.addEventListener('change', () => {
+        if (wakeLockCheckbox.checked) {
+            requestWakeLock();
+        } else {
+            wakeLock.release();
+            wakeLock = null;
+        }
+    });
+
+    const handleVisibilityChange = () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+            requestWakeLock();
+            document.documentElement.requestFullscreen();
+        }
+    };
 
 
-  function GFG_Fun() {
+    reaquireCheckbox.addEventListener('change', () => {
+        if (reaquireCheckbox.checked) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            document.addEventListener('fullscreenchange', handleVisibilityChange);
+        } else {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            document.removeEventListener('fullscreenchange', handleVisibilityChange);
+        }
+    });
+} else {
+    statusDiv.textContent = 'Wake Lock API not supported.';
+    console.error('Wake Lock API not supported.');
+}
 
-    var el_down = document.getElementById("dev-type");
-    var Name = "Unknown OS";
-    if (navigator.appVersion.indexOf("Win") != -1) Name =
-      "Windows OS";
-    if (navigator.appVersion.indexOf("Mac") != -1) Name =
-      "MacOS";
-    if (navigator.userAgent.indexOf("Android") != -1) Name =
-      "Android OS";
-    if (navigator.appVersion.indexOf("X11") != -1) Name =
-      "UNIX OS";
-    if (navigator.appVersion.indexOf("Linux") != -1) Name =
-      "Linux OS";
+function verifyPin() {
+    var pin = document.querySelector('#pin').value;
+    var pwd = document.querySelector('#pwd').value;
+    if (pwd === localStorage.getItem("imppin") && pwd != "") {
+        document.querySelector('button').style.display = "block";
+        document.querySelector('.disabled').style.display = "block";
+        document.querySelector('#pin-cont').style.visibility = "hidden";
+        document.querySelector('#pin-cont').style.display = "none";
+        // document.querySelector('#fullScreenButton').style.display = "block";
+        document.querySelector('.talert-box-container').style.display = "block";
+        document.querySelector('#pwd').value = "";
+        document.querySelector('#pwd-cont').style.display = "none";
+        document.querySelector('.form-container-container').style.display = "block";
 
-    el_down.value = Name;
-  }
-  let timeout;
-
-
-
-</script>
-
-</html>
+    }
+    else {
+        alert("You Entered Wrong Pin");
+        window.location.reload();
+    }
+}
+// function hideformcont() {
+//     document.querySelector('.form-container-container').style.display = "none";
+// }
