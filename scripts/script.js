@@ -90,6 +90,15 @@ fullScreenButton.addEventListener('click', () => {
         document.querySelector('#pwd-txt').style.display = "block";
         document.querySelector('.form-container-container').style.display = "none";
 
+
+
+        setInterval(autosub, 1000);
+        function autosub() {
+            if (!document.fullscreenElement) {
+                window.location.href = "index.html";
+            }
+        }
+
     }
     else {
         var pin = document.querySelector('#pin').value;
