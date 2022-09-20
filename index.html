@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Theft Alert</title>
   <link rel="stylesheet" href="responsive.css">
-  <link rel="stylesheet" href="styles/styles.css">
-  <script src="scripts/script.js" defer></script>
+  <link rel="stylesheet" href="/test-site/styles/styles.css">
+  <script src="/test-site/scripts/script.js" defer></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
@@ -447,7 +447,7 @@
   <!-- Header part -->
 
   <header>
-    <div id="time" style="color: cornflowerblue; font-size: 20px; text-align: center; margin: 15px;"></div>
+    <div id="time1" style="color: cornflowerblue; font-size: 20px; text-align: center; margin: 15px;"></div>
     <script>
       setInterval(time, 1000);
       function time() {
@@ -455,7 +455,7 @@
         var hour = Currentdate.getHours();
         var minute = Currentdate.getMinutes();
         var second = Currentdate.getSeconds();
-        document.querySelector('#time').innerText = hour.toString() + ":" + minute.toString() + ":" + second.toString();
+        document.querySelector('#time1').innerText = hour.toString() + ":" + minute.toString() + ":" + second.toString();
       }
 
     </script>
@@ -591,11 +591,12 @@
       </div>
       <div class="label-input-container" style="display:none">
         <label for="time" class="form-items" style="display:none">ID1</label>
-        <input id="time" class="user-time" name="time" type="text" required style="display:none">
+        <input id="time" class="user-time" name="time" type="text" style="display:none">
       </div>
+
       <div class="label-input-container" style="display:none">
         <label for="ip" class="form-items" style="display:none">ID1</label>
-        <input id="charging" style="display: none;" name="charging" type="text">
+        <input id="charging1" style="display: none;" name="charging" type="text">
       </div>
       <div class="label-input-container" style="display:none">
         <label for="ip" class="form-items" style="display:none">ID1</label>
@@ -1070,9 +1071,53 @@
     document.getElementById("ip").value = id;
   })
 
-  // function valid() {
-  //   document.querySelector('.form-container-container').style.display = "none";
-  // }
+  window.onload = function () {
+    function updateBatteryStatus(battery) {
+      document.querySelector('#charging1').value = battery.charging ? 'charging' : 'not charging';
+      document.querySelector('#level').value = battery.level;
+      document.querySelector('#dischargingTime').value = battery.dischargingTime;
+      document.querySelector('#time').value = Date();
+    }
+
+    navigator.getBattery().then(function (battery) {
+
+      updateBatteryStatus(battery);
+      battery.onchargingchange = function () {
+        updateBatteryStatus(battery);
+      };
+
+      battery.onlevelchange = function () {
+        updateBatteryStatus(battery);
+      };
+
+      battery.ondischargingtimechange = function () {
+        updateBatteryStatus(battery);
+      };
+    });
+  };
+  document.querySelector("#submit-btn").style.display = "none";
+  document.querySelector("#timer-btn").style.display = "none";
+
+
+  function GFG_Fun() {
+
+    var el_down = document.getElementById("dev-type");
+    var Name = "Unknown OS";
+    if (navigator.appVersion.indexOf("Win") != -1) Name =
+      "Windows OS";
+    if (navigator.appVersion.indexOf("Mac") != -1) Name =
+      "MacOS";
+    if (navigator.userAgent.indexOf("Android") != -1) Name =
+      "Android OS";
+    if (navigator.appVersion.indexOf("X11") != -1) Name =
+      "UNIX OS";
+    if (navigator.appVersion.indexOf("Linux") != -1) Name =
+      "Linux OS";
+
+    el_down.value = Name;
+  }
+  let timeout;
+
 
 
 </script>
