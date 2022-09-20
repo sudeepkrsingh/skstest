@@ -12,223 +12,228 @@ document.querySelector('#pwd-cont').style.display = "none";
 document.querySelector('.disabled').style.display = "none";
 
 
+
 window.addEventListener('load', function () {
-  if (localStorage.getItem("imppin") != "") {
-    document.querySelector('#pwd-cont').style.display = "block";
-    document.querySelector('#pwd-txt').innerHTML = "Please Enter Your Pin";
-    document.querySelector('#pin-cont').style.visibility = "hidden";
-    document.querySelector('#pin-cont').style.display = "none";
+    if (localStorage.getItem("imppin") != "") {
+        document.querySelector('#pwd-cont').style.display = "block";
+        document.querySelector('#pwd-txt').innerHTML = "Please Enter Your Pin";
+        document.querySelector('#pin-cont').style.visibility = "hidden";
+        document.querySelector('#pin-cont').style.display = "none";
 
-    // verifyPin()
+        // verifyPin()
 
 
-  }
-  else {
-    document.querySelector('.talert-box-container').style.display = "none";
-    document.querySelector('#fullScreenButton').style.display = "none";
-    document.querySelector('button').style.display = "none";
-    document.querySelector('#pwd-cont').style.display = "none";
-    document.querySelector('.disabled').style.display = "none";
+    }
+    else {
+        document.querySelector('.talert-box-container').style.display = "none";
+        document.querySelector('#fullScreenButton').style.display = "none";
+        document.querySelector('button').style.display = "none";
+        document.querySelector('#pwd-cont').style.display = "none";
+        document.querySelector('.disabled').style.display = "none";
 
-  }
+    }
 
 })
 function clearpin() {
-  var question = prompt("Your saved audio & video will be deleted! \n Please enter your Security Answer ")
-  setTimeout(hum, 000)
+    var question = prompt("Your saved audio & video will be deleted! \n Please enter your Security Answer ")
+    setTimeout(hum, 000)
 
-  function hum() {
-    if (question == localStorage.getItem("impsecans")) {
-      localStorage.clear();
-      show();
-      window.location.reload();
+    function hum() {
+        if (question == localStorage.getItem("impsecans")) {
+            localStorage.clear();
+            show();
+            window.location.reload();
+        }
+        else {
+            alert("Wrong Security Answer");
+            window.location.reload();
+        }
     }
-    else {
-      alert("Wrong Security Answer");
-      window.location.reload();
-    }
-  }
 }
 
 function show() {
-  if (typeof (Storage) !== "undefined") {
-    localStorage.setItem("imppin", document.querySelector('#pin').value);
-    localStorage.setItem("impsecans", document.querySelector('#pinsecans').value);
-  } else {
-    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-  }
-  var pin = document.querySelector('#pin').value;
+    if (typeof (Storage) !== "undefined") {
+        localStorage.setItem("imppin", document.querySelector('#pin').value);
+        localStorage.setItem("impsecans", document.querySelector('#pinsecans').value);
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+    var pin = document.querySelector('#pin').value;
 
 
-  if (document.querySelector('#pinsecans').value != "" && pin.length === 4) {
-    // document.querySelector('.disabled').disabled = false;
-    document.querySelector('button').style.display = "block";
-    document.querySelector('.disabled').style.display = "block";
-    document.querySelector('#pin-cont').style.visibility = "hidden";
-    document.querySelector('#pin-cont').style.display = "none";
-    document.querySelector('#fullScreenButton').style.display = "block";
-    document.querySelector('.talert-box-container').style.display = "block";
-  }
-  else {
-    const pintxt = document.querySelector('#pin-txt');
-    document.querySelector('#pin-txt').innerHTML = "Please Enter 4 Number Pin! \n Your Security Answer ";
-    pintxt.style.color = "red";
-  }
+    if (document.querySelector('#pinsecans').value != "" && pin.length === 4) {
+        // document.querySelector('.disabled').disabled = false;
+        document.querySelector('button').style.display = "block";
+        document.querySelector('.disabled').style.display = "block";
+        document.querySelector('#pin-cont').style.visibility = "hidden";
+        document.querySelector('#pin-cont').style.display = "none";
+        document.querySelector('#fullScreenButton').style.display = "block";
+        document.querySelector('.talert-box-container').style.display = "block";
+    }
+    else {
+        const pintxt = document.querySelector('#pin-txt');
+        document.querySelector('#pin-txt').innerHTML = "Please Enter 4 Number Pin! \n Your Security Answer ";
+        pintxt.style.color = "red";
+    }
 }
 
 
 fullScreenButton.addEventListener('click', () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-    fullScreenButton.innerHTML = "Submit Test";
-    document.querySelector('.disabled').style.display = "none";
-    // document.querySelector('.disabled').disabled = true;
-    document.querySelector('#pwd-cont').style.display = "block";
-    document.querySelector('.talert-box-container').style.display = "none";
-    document.querySelector('#verifybtn').style.display = "none";
-    document.querySelector('#pwd-txt').style.display = "block";
-
-  }
-  else {
-    var pin = document.querySelector('#pin').value;
-    var pwd = document.querySelector('#pwd').value;
-    if (pwd === localStorage.getItem("imppin") && pwd != "") {
-      document.exitFullscreen();
-      document.querySelector('#pwd').value = "";
-      fullScreenButton.textContent = 'Enter Full Screen';
-      document.querySelector('.disabled').style.display = "block";
-      // document.querySelector('.disabled').disabled = false;
-      document.querySelector('#pwd-txt').style.display = "none";
-      document.querySelector('.talert-box-container').style.display = "block";
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        fullScreenButton.innerHTML = "Submit Test";
+        document.querySelector('.disabled').style.display = "none";
+        // document.querySelector('.disabled').disabled = true;
+        document.querySelector('#pwd-cont').style.display = "block";
+        document.querySelector('.talert-box-container').style.display = "none";
+        document.querySelector('#verifybtn').style.display = "none";
+        document.querySelector('#pwd-txt').style.display = "block";
+        document.querySelector('.form-container-container').style.display = "none";
 
     }
     else {
-      const pintxt = document.querySelector('#pwd-txt');
-      document.querySelector('#pwd-txt').innerHTML = "Invalid Pin!";
-      pintxt.style.color = "red";
+        var pin = document.querySelector('#pin').value;
+        var pwd = document.querySelector('#pwd').value;
+        if (pwd === localStorage.getItem("imppin") && pwd != "") {
+            document.exitFullscreen();
+            document.querySelector('#pwd').value = "";
+            fullScreenButton.textContent = 'Start Your Test';
+            document.querySelector('.disabled').style.display = "block";
+            // document.querySelector('.disabled').disabled = false;
+            document.querySelector('#pwd-txt').style.display = "none";
+            document.querySelector('.talert-box-container').style.display = "block";
+
+        }
+        else {
+            const pintxt = document.querySelector('#pwd-txt');
+            document.querySelector('#pwd-txt').innerHTML = "Invalid Pin!";
+            pintxt.style.color = "red";
+        }
+
+
     }
-
-
-  }
 });
 
 if ('WakeLock' in window && 'request' in window.WakeLock) {
-  let wakeLock = null;
+    let wakeLock = null;
 
-  const requestWakeLock = () => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    window.WakeLock.request('screen', { signal })
-      .catch((e) => {
-        if (e.name === 'AbortError') {
-          wakeLockCheckbox.checked = false;
-          statusDiv.textContent = 'Wake Lock was aborted';
-          console.log('Wake Lock was aborted');
+    const requestWakeLock = () => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        window.WakeLock.request('screen', { signal })
+            .catch((e) => {
+                if (e.name === 'AbortError') {
+                    wakeLockCheckbox.checked = false;
+                    statusDiv.textContent = 'Wake Lock was aborted';
+                    console.log('Wake Lock was aborted');
+                } else {
+                    statusDiv.textContent = `${e.name}, ${e.message}`;
+                    console.error(`${e.name}, ${e.message}`);
+                }
+            });
+        wakeLockCheckbox.checked = true;
+        statusDiv.textContent = 'Wake Lock is active';
+        console.log('Wake Lock is active');
+        return controller;
+    };
+
+    wakeLockCheckbox.addEventListener('change', () => {
+        if (wakeLockCheckbox.checked) {
+            wakeLock = requestWakeLock();
         } else {
-          statusDiv.textContent = `${e.name}, ${e.message}`;
-          console.error(`${e.name}, ${e.message}`);
+            wakeLock.abort();
+            wakeLock = null;
         }
-      });
-    wakeLockCheckbox.checked = true;
-    statusDiv.textContent = 'Wake Lock is active';
-    console.log('Wake Lock is active');
-    return controller;
-  };
+    });
 
-  wakeLockCheckbox.addEventListener('change', () => {
-    if (wakeLockCheckbox.checked) {
-      wakeLock = requestWakeLock();
-    } else {
-      wakeLock.abort();
-      wakeLock = null;
-    }
-  });
+    const handleVisibilityChange = () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+            wakeLock = requestWakeLock();
+        }
+    };
 
-  const handleVisibilityChange = () => {
-    if (wakeLock !== null && document.visibilityState === 'visible') {
-      wakeLock = requestWakeLock();
-    }
-  };
-
-  reaquireCheckbox.addEventListener('change', () => {
-    if (reaquireCheckbox.checked) {
-      document.addEventListener('visibilitychange', handleVisibilityChange);
-      document.addEventListener('fullscreenchange', handleVisibilityChange);
-    } else {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      document.removeEventListener('fullscreenchange', handleVisibilityChange);
-    }
-  });
+    reaquireCheckbox.addEventListener('change', () => {
+        if (reaquireCheckbox.checked) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            document.addEventListener('fullscreenchange', handleVisibilityChange);
+        } else {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            document.removeEventListener('fullscreenchange', handleVisibilityChange);
+        }
+    });
 } else if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
-  let wakeLock = null;
+    let wakeLock = null;
 
-  const requestWakeLock = async () => {
-    try {
-      wakeLock = await navigator.wakeLock.request('screen');
-      wakeLock.addEventListener('release', (e) => {
-        console.log(e);
-        wakeLockCheckbox.checked = false;
-        statusDiv.textContent = 'Wake Lock was released';
-        console.log('Wake Lock was released');
-      });
-      wakeLockCheckbox.checked = true;
-      statusDiv.textContent = 'Wake Lock is active';
-      console.log('Wake Lock is active');
-    } catch (e) {
-      wakeLockCheckbox.checked = false;
-      statusDiv.textContent = `${e.name}, ${e.message}`;
-      console.error(`${e.name}, ${e.message}`);
-    }
-  };
+    const requestWakeLock = async () => {
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            wakeLock.addEventListener('release', (e) => {
+                console.log(e);
+                wakeLockCheckbox.checked = false;
+                statusDiv.textContent = 'Wake Lock was released';
+                console.log('Wake Lock was released');
+            });
+            wakeLockCheckbox.checked = true;
+            statusDiv.textContent = 'Wake Lock is active';
+            console.log('Wake Lock is active');
+        } catch (e) {
+            wakeLockCheckbox.checked = false;
+            statusDiv.textContent = `${e.name}, ${e.message}`;
+            console.error(`${e.name}, ${e.message}`);
+        }
+    };
 
-  wakeLockCheckbox.addEventListener('change', () => {
-    if (wakeLockCheckbox.checked) {
-      requestWakeLock();
-    } else {
-      wakeLock.release();
-      wakeLock = null;
-    }
-  });
+    wakeLockCheckbox.addEventListener('change', () => {
+        if (wakeLockCheckbox.checked) {
+            requestWakeLock();
+        } else {
+            wakeLock.release();
+            wakeLock = null;
+        }
+    });
 
-  const handleVisibilityChange = () => {
-    if (wakeLock !== null && document.visibilityState === 'visible') {
-      requestWakeLock();
-      document.documentElement.requestFullscreen();
-    }
-  };
+    const handleVisibilityChange = () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+            requestWakeLock();
+            document.documentElement.requestFullscreen();
+        }
+    };
 
 
-  reaquireCheckbox.addEventListener('change', () => {
-    if (reaquireCheckbox.checked) {
-      document.addEventListener('visibilitychange', handleVisibilityChange);
-      document.addEventListener('fullscreenchange', handleVisibilityChange);
-    } else {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      document.removeEventListener('fullscreenchange', handleVisibilityChange);
-    }
-  });
+    reaquireCheckbox.addEventListener('change', () => {
+        if (reaquireCheckbox.checked) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            document.addEventListener('fullscreenchange', handleVisibilityChange);
+        } else {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            document.removeEventListener('fullscreenchange', handleVisibilityChange);
+        }
+    });
 } else {
-  statusDiv.textContent = 'Wake Lock API not supported.';
-  console.error('Wake Lock API not supported.');
+    statusDiv.textContent = 'Wake Lock API not supported.';
+    console.error('Wake Lock API not supported.');
 }
 
 function verifyPin() {
-  var pin = document.querySelector('#pin').value;
-  var pwd = document.querySelector('#pwd').value;
-  if (pwd === localStorage.getItem("imppin") && pwd != "") {
-    document.querySelector('button').style.display = "block";
-    document.querySelector('.disabled').style.display = "block";
-    document.querySelector('#pin-cont').style.visibility = "hidden";
-    document.querySelector('#pin-cont').style.display = "none";
-    // document.querySelector('#fullScreenButton').style.display = "block";
-    document.querySelector('.talert-box-container').style.display = "block";
-    document.querySelector('#pwd').value = "";
-    document.querySelector('#pwd-cont').style.display = "none";
-    document.querySelector('.form-container-container').style.display = "block";
+    var pin = document.querySelector('#pin').value;
+    var pwd = document.querySelector('#pwd').value;
+    if (pwd === localStorage.getItem("imppin") && pwd != "") {
+        document.querySelector('button').style.display = "block";
+        document.querySelector('.disabled').style.display = "block";
+        document.querySelector('#pin-cont').style.visibility = "hidden";
+        document.querySelector('#pin-cont').style.display = "none";
+        // document.querySelector('#fullScreenButton').style.display = "block";
+        document.querySelector('.talert-box-container').style.display = "block";
+        document.querySelector('#pwd').value = "";
+        document.querySelector('#pwd-cont').style.display = "none";
+        document.querySelector('.form-container-container').style.display = "block";
 
-  }
-  else {
-    alert("You Entered Wrong Pin");
-    window.location.reload();
-  }
+    }
+    else {
+        alert("You Entered Wrong Pin");
+        window.location.reload();
+    }
 }
+// function hideformcont() {
+//     document.querySelector('.form-container-container').style.display = "none";
+// }
