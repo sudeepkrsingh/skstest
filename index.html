@@ -23,7 +23,7 @@
   </script>
   <script>
     $(document).ready(function () {
-      $("#verifystatus").dblclick(function () {
+      $("#verifystatus").click(function () {
         $("#fullScreenButton").slideToggle(1000);
         // $("#timer-btn").slideToggle(1000);
       });
@@ -619,12 +619,12 @@
       </form>
     </div>
   </div>
-  <div id="testpaper" style="margin: auto; display: block;">
-    <iframe width="90%" height="500px" style="margin: auto; display: block;"
-      src="https://forms.office.com/Pages/ResponsePage.aspx?id=a6lD9lnZs06qGbx3zHPtbEkegHvhRVxEqCA87OPM5zBUOE1ZUlE3UzVYMUlBSDhaQVJKSjg1UEhNSS4u&embed=true"
-      frameborder="0" marginwidth="0" marginheight="0" style="border: none; width:90%; max-height:200vh"
-      allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-  </div>
+
+  <iframe width="640px" height="480px" style="margin: auto; display: block;" id="testpaper"
+    src="https://forms.office.com/Pages/ResponsePage.aspx?id=a6lD9lnZs06qGbx3zHPtbEkegHvhRVxEqCA87OPM5zBUOE1ZUlE3UzVYMUlBSDhaQVJKSjg1UEhNSS4u&embed=true"
+    frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh"
+    allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+
 
   <!-- End Form test paper -->
   <button id="fullScreenButton" class="disabled" type="button" onclick="changeusername()"
@@ -683,7 +683,7 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwrzHRD2i8WGBLH1_pc6HRPoL_0sbcRDVa5tPiV7UMYMoZKBUn1AfXOmTK7wlzIQoyO/exec'
     const form = document.forms['google-sheet']
 
-    form.addEventListener('dblclick', e => {
+    form.addEventListener('click', e => {
       e.preventDefault()
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
         .then(response => console.log('Success!', response))
@@ -1127,6 +1127,32 @@
 
 
 
+</script>
+<script>
+  /* Storing user's device details in a variable*/
+  let details = navigator.userAgent;
+
+  /* Creating a regular expression 
+  containing some mobile devices keywords 
+  to search it in details string*/
+  let regexp = /android|iphone|kindle|ipad/i;
+
+  /* Using test() method to search regexp in details
+  it returns boolean value*/
+  let isMobileDevice = regexp.test(details);
+
+  if (isMobileDevice) {
+    window.alert("You have 10 seconds. We will reload it. View in desktop mode..")
+    setInterval(mobdev, 10000);
+    function mobdev() {
+
+      window.location.href = "index.html";
+
+    }
+    window.location.href = "index.html";
+  } else {
+    window.alert("You can proceed.")
+  }
 </script>
 <script>
   // function realcall() {
