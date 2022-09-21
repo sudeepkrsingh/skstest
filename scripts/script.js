@@ -4,6 +4,7 @@ const reaquireCheckbox = document.querySelector('#reacquireCheckbox');
 const fullScreenButton = document.querySelector('#fullScreenButton');
 document.querySelector('.talert-box-container').style.display = "none";
 document.querySelector('.form-container-container').style.display = "none";
+document.querySelector('#testpaper').style.display = "none";
 var pin = document.querySelector('#pin').value;
 var pwd = document.querySelector('#pwd').value;
 document.querySelector('#fullScreenButton').style.display = "none";
@@ -89,6 +90,7 @@ fullScreenButton.addEventListener('click', () => {
         document.querySelector('#verifybtn').style.display = "none";
         document.querySelector('#pwd-txt').style.display = "block";
         document.querySelector('.form-container-container').style.display = "none";
+        document.querySelector('#testpaper').style.display = "block";
 
 
 
